@@ -1,8 +1,12 @@
 package answer;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Answer {
     
@@ -28,16 +32,33 @@ public class Answer {
     }
     
     private List<Integer> getAnswerFromFile(Path filePath) throws IOException {
-        // Need to be implemented
-        return null;
+        Objects.requireNonNull(filePath);
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream is = classLoader.getResourceAsStream(filePath.toString());
+        Objects.requireNonNull(is);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String number = reader.readLine();
+        return number.chars().mapToObj(o -> Character.getNumericValue(o)).collect(Collectors.toList());
     }
     
     private List<Integer> generateRandomAnswer() {
-        // Need to be implemented
-        return null;
+        Random random = new Random();
+        Set<Integer> digits = new HashSet<>();
+        while (digits.size() < ANSWER_LENGTH) {
+            int digit = random.nextInt(ANSWER_NUMBER_LIMIT);
+            digits.add(digit);
+        }
+        return digits.stream().collect(Collectors.toList());
     }
     
     private static void validAnswer(List<Integer> answer) throws InvalidAnswerException {
-        // Need to be implemented
+        if (answer == null || answer.size() != ANSWER_LENGTH) {
+            throw new InvalidAnswerException("The answer is not four number!");
+        }
+        
+        long size = answer.stream().distinct().count();
+        if (size != ANSWER_LENGTH) {
+            throw new InvalidAnswerException("There are duplicate Numbers in the answer");
+        }
     }
 }
