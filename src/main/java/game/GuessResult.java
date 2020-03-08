@@ -12,12 +12,18 @@ public class GuessResult {
     
     
     public String getResult() {
-        // Need to be implemented
-        return "";
+        return guessRecord.entrySet().stream().map(record -> record.getKey() + " " + record.getValue()).reduce("", (partialString, element) -> partialString + element + "\n").trim();
     }
     
     public GameResult getGameResult() {
-        // Need to be implemented
-        return null;
+        if (guessRecord.values().contains("4A0B")) {
+            return GameResult.WIN;
+        }
+    
+        if (guessRecord.size() >= CHANCE_LIMIT) {
+            return GameResult.LOST;
+        }
+    
+        return GameResult.NORMAL;
     }
 }
