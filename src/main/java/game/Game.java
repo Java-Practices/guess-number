@@ -5,7 +5,7 @@ import answer.InvalidAnswerException;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,19 +14,14 @@ public class Game {
     
     private Answer answer;
     private Map<String, String> guessResult;
-    private static final int CHANCE_LIMIT = 6;
     
     public Game() throws InvalidAnswerException {
         Path filePath = Paths.get("answer.txt");
-        this.answer =  new Answer(filePath);
-        this.guessResult = new HashMap<>();
+        this.answer = new Answer(filePath);
+        this.guessResult = new LinkedHashMap<>();
     }
     
-    public String guess(List<Integer> numbers) throws ChanceOverException {
-        if (this.guessResult.size() >= CHANCE_LIMIT) {
-            throw new ChanceOverException("Chance over！");
-        }
-        
+    public String guess(List<Integer> numbers) {
         String result = "";
         if (numbers.equals(answer.getAnswer())) {
             result = "4A0B";
@@ -37,6 +32,29 @@ public class Game {
         }
         String key = numbers.stream().map(String::valueOf).collect(Collectors.joining(""));
         this.guessResult.put(key, result);
+        return result;
+    }
+    
+    public boolean isOver() {
+        GuessResult guessResult = new GuessResult(this.guessResult);
+        GameResult gameResult = guessResult.getGameResult();
+        return gameResult == GameResult.LOST || gameResult == GameResult.WIN;
+    }
+    
+    public String getResult() {
+        GuessResult guessResult = new GuessResult(this.guessResult);
+        GameResult gameResult = guessResult.getGameResult();
+        String result = "";
+        switch (gameResult) {
+            case WIN:
+                result = guessResult.getResult() + "\nCongratulations, you win!";
+                break;
+            case LOST:
+                result = guessResult.getResult() + "\nUnfortunately, you have no chance, the answer is " + this.answer.toString() + "!";
+                break;
+            default:
+                result = guessResult.getResult();
+        }
         return result;
     }
     

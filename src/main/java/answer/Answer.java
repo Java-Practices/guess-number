@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Answer {
@@ -29,6 +33,11 @@ public class Answer {
     public void setAnswer(List<Integer> answer) throws InvalidAnswerException {
         validAnswer(answer);
         this.answer = answer;
+    }
+    
+    @Override
+    public String toString() {
+        return answer.stream().map(String::valueOf).collect(Collectors.joining(""));
     }
     
     private List<Integer> getAnswerFromFile(Path filePath) throws IOException {
