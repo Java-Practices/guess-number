@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class AnswerTest {
     
     @Test
-    public void test_get_answer_is_1234_when_answer_file_is_exit() throws InvalidAnswerException {
+    void test_get_answer_is_1234_when_answer_file_is_exit() {
         Path filePath = Paths.get("answer.txt");
         Answer answer = new Answer(filePath);
         List<Integer> answerList = answer.getAnswer();
@@ -21,7 +21,7 @@ class AnswerTest {
     }
     
     @Test
-    public void test_set_answer_correct_when_answer_is_1234() throws InvalidAnswerException {
+    void test_set_answer_correct_when_answer_is_1234() {
         Answer answer = new Answer(null);
         answer.setAnswer(Arrays.asList(1, 2, 3, 4));
         List<Integer> answerList = answer.getAnswer();
@@ -29,7 +29,7 @@ class AnswerTest {
     }
     
     @Test
-    public void test_set_answer_incorrect_when_answer_is_123() {
+    void test_set_answer_incorrect_when_answer_is_123() {
         assertThrows(InvalidAnswerException.class, () -> {
             Answer answer = new Answer(null);
             answer.setAnswer(Arrays.asList(1, 2, 3));
@@ -37,7 +37,7 @@ class AnswerTest {
     }
     
     @Test
-    public void test_set_answer_incorrect_when_answer_is_1233() {
+    void test_set_answer_incorrect_when_answer_is_1233() {
         assertThrows(InvalidAnswerException.class, () -> {
             Answer answer = new Answer(null);
             answer.setAnswer(Arrays.asList(1, 2, 3, 3));
@@ -45,7 +45,7 @@ class AnswerTest {
     }
     
     @Test
-    public void test_generate_round_answer() throws InvalidAnswerException {
+    void test_generate_round_answer() {
         Answer answer = new Answer(null);
         List<Integer> answerList = answer.getAnswer();
         assertEquals(4, answerList.size());
