@@ -20,7 +20,7 @@ public class Answer {
     
     public Answer(Path filePath) {
         try {
-            List<Integer> numbers = generateRandomAnswer();
+            List<Integer> numbers = getAnswerFromFile(filePath);
             validAnswer(numbers);
             this.setAnswer(numbers);
         } catch (Exception e) {
