@@ -17,7 +17,7 @@ class AnswerTest {
         Path filePath = Paths.get("answer.txt");
         Answer answer = new Answer(filePath);
         List<Integer> answerList = answer.getAnswer();
-        assertEquals(Arrays.asList(2, 3, 4, 5), answerList);
+        assertEquals(Arrays.asList(1, 2, 3, 4), answerList);
     }
     
     @Test
