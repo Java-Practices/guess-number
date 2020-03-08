@@ -1,22 +1,23 @@
-import answer.InvalidAnswerException;
 import game.Game;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static java.lang.System.*;
+
 public class App {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(in);
         Game game = new Game();
-        System.out.println("Guess numbers game starting, please enter four digits：");
+        out.println("Guess numbers game starting, please enter four digits：");
         do {
             String guess = scanner.nextLine();
             if (isCorrectInput(guess)) {
                 List<Integer> numbers = guess.chars().mapToObj(o -> Character.getNumericValue(o)).collect(Collectors.toList());
                 game.guess(numbers);
                 String result = game.getResult();
-                System.out.println(result);
+                out.println(result);
             }
         } while (!game.isOver());
     }
@@ -24,14 +25,14 @@ public class App {
     private static boolean isCorrectInput(String input) {
         long size = input.chars().distinct().count();
         if (size != 4) {
-            System.out.println(input + " Wrong input");
+            out.println(input + " Wrong input");
             return false;
         }
         
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException nfe) {
-            System.out.println(input + " Wrong input");
+            out.println(input + " Wrong input");
             return false;
         }
         
