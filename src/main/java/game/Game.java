@@ -1,7 +1,6 @@
 package game;
 
 import answer.Answer;
-import answer.InvalidAnswerException;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +14,7 @@ public class Game {
     private Answer answer;
     private Map<String, String> guessResult;
     
-    public Game() throws InvalidAnswerException {
+    public Game() {
         Path filePath = Paths.get("answer.txt");
         this.answer = new Answer(filePath);
         this.guessResult = new LinkedHashMap<>();

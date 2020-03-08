@@ -1,6 +1,5 @@
 package game;
 
-import answer.InvalidAnswerException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,7 @@ class GameTest {
     private static Game game;
     
     @BeforeAll
-    static void setUp() throws InvalidAnswerException {
+    static void setUp() {
         game = new Game();
     }
     
@@ -52,7 +51,7 @@ class GameTest {
     }
     
     @Test
-    void test_game_over_return_false() throws InvalidAnswerException {
+    void test_game_over_return_false() {
         Game tempGame = new Game();
         tempGame.guess(Arrays.asList(1, 5, 6, 7));
         boolean result = tempGame.isOver();
@@ -60,7 +59,7 @@ class GameTest {
     }
     
     @Test
-    void test_game_over_return_true() throws InvalidAnswerException {
+    void test_game_over_return_true() {
         Game tempGame = new Game();
         tempGame.guess(Arrays.asList(1, 2, 3, 4));
         boolean result = tempGame.isOver();
@@ -68,7 +67,7 @@ class GameTest {
     }
     
     @Test
-    void test_game_win_result_string() throws InvalidAnswerException {
+    void test_game_win_result_string() {
         Game tempGame = new Game();
         tempGame.guess(Arrays.asList(1, 2, 3, 4));
         boolean result = tempGame.isOver();
@@ -79,7 +78,7 @@ class GameTest {
     }
     
     @Test
-    void test_game_lost_result_string() throws InvalidAnswerException {
+    void test_game_lost_result_string() {
         Game tempGame = new Game();
         tempGame.guess(Arrays.asList(0, 2, 3, 4));
         tempGame.guess(Arrays.asList(6, 2, 3, 4));

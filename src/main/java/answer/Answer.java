@@ -18,9 +18,11 @@ public class Answer {
     private static final int ANSWER_NUMBER_LIMIT = 10;
     private List<Integer> answer = null;
     
-    public Answer(Path filePath) throws InvalidAnswerException {
+    public Answer(Path filePath) {
         try {
-            this.setAnswer(getAnswerFromFile(filePath));
+            List<Integer> numbers = generateRandomAnswer();
+            validAnswer(numbers);
+            this.setAnswer(numbers);
         } catch (Exception e) {
             this.setAnswer(generateRandomAnswer());
         }
@@ -30,8 +32,7 @@ public class Answer {
         return this.answer;
     }
     
-    public void setAnswer(List<Integer> answer) throws InvalidAnswerException {
-        validAnswer(answer);
+    public void setAnswer(List<Integer> answer){
         this.answer = answer;
     }
     
