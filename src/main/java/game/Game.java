@@ -41,12 +41,17 @@ public class Game {
     }
     
     private int getBSize(List<Integer> numbers) {
-        // Need to be implemented
-        return 0;
+        long size  =this.answer.getAnswer().stream().filter(numbers::contains).count();
+        return (int) (size - getASize(numbers));
     }
     
     private int getASize(List<Integer> numbers) {
-        // Need to be implemented
-        return 0;
+        int count = 0;
+        for (int i = 0; i < this.answer.getAnswer().size(); i++) {
+            if (answer.getAnswer().get(i) == numbers.get(i)) {
+                count = count + 1;
+            }
+        }
+        return count;
     }
 }
