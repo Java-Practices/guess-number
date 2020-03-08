@@ -44,7 +44,7 @@ public class Answer {
         return null;
     }
     
-    private static void validAnswer(List<Integer> answer) throws InvalidAnswerException {
+    static void validAnswer(List<Integer> answer) throws InvalidAnswerException {
         // Need to be implemented
     }
 }

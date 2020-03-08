@@ -32,7 +32,7 @@ class AnswerTest {
     void test_set_answer_incorrect_when_answer_is_123() {
         assertThrows(InvalidAnswerException.class, () -> {
             Answer answer = new Answer(null);
-            answer.setAnswer(Arrays.asList(1, 2, 3));
+            answer.validAnswer(Arrays.asList(1, 2, 3));
         });
     }
     
@@ -40,7 +40,7 @@ class AnswerTest {
     void test_set_answer_incorrect_when_answer_is_1233() {
         assertThrows(InvalidAnswerException.class, () -> {
             Answer answer = new Answer(null);
-            answer.setAnswer(Arrays.asList(1, 2, 3, 3));
+            answer.validAnswer(Arrays.asList(1, 2, 3, 3));
         });
     }
     
