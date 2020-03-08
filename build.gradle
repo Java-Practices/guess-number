@@ -1,7 +1,8 @@
 plugins {
-    id 'java'
+    id 'application'
 }
 
+apply plugin: "java"
 group 'guess-number'
 version '1.0-SNAPSHOT'
 
@@ -20,4 +21,16 @@ test {
     testLogging {
         events "passed", "skipped", "failed"
     }
+}
+
+ext {
+    javaMainClass = "App"
+}
+
+application {
+    mainClassName = javaMainClass
+}
+
+run {
+    standardInput = System.in
 }
