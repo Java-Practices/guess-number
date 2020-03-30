@@ -58,17 +58,15 @@ public class Game {
     }
     
     private int getBSize(List<Integer> numbers) {
-        long size  =this.answer.getAnswer().stream().filter(numbers::contains).count();
-        return (int) (size - getASize(numbers));
+        return (int) numbers.stream()
+                .filter(x -> answer.getAnswer().contains(x) && numbers.indexOf(x) != answer.getAnswer().indexOf(x))
+                .count();
     }
     
     private int getASize(List<Integer> numbers) {
-        int count = 0;
-        for (int i = 0; i < this.answer.getAnswer().size(); i++) {
-            if (answer.getAnswer().get(i) == numbers.get(i)) {
-                count = count + 1;
-            }
-        }
-        return count;
+        return (int) numbers.stream()
+                .filter(x -> answer.getAnswer().contains(x) && numbers.indexOf(x) == answer.getAnswer().indexOf(x))
+                .count();
+    
     }
 }

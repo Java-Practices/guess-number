@@ -59,12 +59,7 @@ public class Answer {
     }
     
     private List<Integer> generateRandomAnswer() {
-        Random random = new Random();
-        Set<Integer> digits = new HashSet<>();
-        while (digits.size() < ANSWER_LENGTH) {
-            int digit = random.nextInt(ANSWER_NUMBER_LIMIT);
-            digits.add(digit);
-        }
-        return digits.stream().collect(Collectors.toList());
+        return new Random().ints(1, ANSWER_NUMBER_LIMIT)
+                .boxed().distinct().limit(ANSWER_LENGTH).collect(Collectors.toList());
     }
 }
